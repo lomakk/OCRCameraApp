@@ -3,23 +3,34 @@ package com.vision.scantexter.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.vision.scantexter.Greeting
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.vision.scantexter.android.screen.ocr.OCRScreen
+import com.vision.scantexter.android.theme.ScanTexterTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
-            MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    GreetingView(Greeting().greet())
+            ScanTexterTheme {
+                BaseActivityScreenContainer {
+                    OCRScreen(
+                        showOCRState = remember { mutableStateOf(true) },
+                        onCopyText = {
+
+                        }
+                    )
                 }
             }
         }
@@ -27,14 +38,25 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingView(text: String) {
-    Text(text = text)
-}
+fun BaseActivityScreenContainer(
+    content: @Composable (navController: NavHostController) -> Unit
+) {
+    val navController = rememberNavController()
+    val systemUiController = rememberSystemUiController()
 
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        GreetingView("Hello, Android!")
+    ProvideWindowInsets {
+        SideEffect {
+            systemUiController.setStatusBarColor(
+                color = Color.Transparent,
+                darkIcons = true
+            )
+            systemUiController.setNavigationBarColor(
+                color = Color.Transparent,
+                darkIcons = false
+            )
+        }
+
+        content(navController)
     }
 }
+

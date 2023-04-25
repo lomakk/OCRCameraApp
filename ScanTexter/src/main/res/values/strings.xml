@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="permission_grant">Grant</string>
+    <string name="permission_denied">Denied</string>
+    <string name="permission_denied_message">Permission denied. Please, grant us access on the Settings screen.</string>
+    <string name="permission_go_to_settings">Go to Settings</string>
+
+    <string name="camera_permission_text">Please grant camera permission. We use it to take the image.</string>
+    <string name="camera_flash_off">flash off</string>
+    <string name="camera_flash_on">flash on</string>
+    <string name="camera_flash_auto">flash auto</string>
+    <string name="camera_flash_always">flash always</string>
+    <string name="camera_refresh">refresh</string>
+    <string name="camera_text_recognition">Text recognition</string>
+    <string name="camera_take_photo">Take photo</string>
+    <string name="camera_selected_text">Selected text</string>
+    <string name="camera_select_all">Select</string>
+    <string name="camera_copy">Copy</string>
+    <string name="camera_cancel">Cancel</string>
+    <string name="camera_edit">Edit</string>
+    <string name="camera_clear">Clear</string>
+    <string name="camera_take_photo_ocr_message">Take a photo of words to copy</string>
+</resources>
